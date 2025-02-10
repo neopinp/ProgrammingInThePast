@@ -1,0 +1,17 @@
+module caesarCipher 
+implicit none 
+
+! ENCRYPT FUCTION
+
+SUBROUTINE ENCRYPT()
+
+
+
+! DECRYPT FUNCTION
+SUBROUTINE DECRYPT()
+
+
+
+! SOLVE FUNCTION
+SUBROUTINE SOLVE()
+end program caesarCipher 

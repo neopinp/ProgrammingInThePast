@@ -13,7 +13,15 @@ Q: How is each language similar or dissimilar to others?
 |      |             |                       |
 |      |             |                       |
 
+Inital thoughts:
+Create an array [a-z] mapping with index 
+Shift forward by #
+Shift backwards by #
+Solve 
 
+
+Using module instead of program programName
+subroutines vs. functions
 
 
 
