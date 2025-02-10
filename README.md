@@ -8,20 +8,15 @@ Q: How is each language similar or dissimilar to others?
 
 
 ## FORTRAN 
-| DATE | HOURS SPENT | TASKS/ISSUES/THOUGHTS | 
-|------|-------------|-----------------------|
-|      |             |                       |
-|      |             |                       |
-
-Inital thoughts:
-Create an array [a-z] mapping with index 
-Shift forward by #
-Shift backwards by #
-Solve 
-
-
-Using module instead of program programName
-subroutines vs. functions
+| DATE | HOURS SPENT |            TASKS(TA)/ISSUES(I)/THOUGHTS(T)             | 
+|------|-------------|--------------------------------------------------------|
+| 2/10 |      2      |Learning syntax, Intial Thoughts:                       |
+|      |             |Create an array [a-z] mapping with index                |
+|      |             |Shit forward by #, Shift backward by #, solve           |
+|      |             |WEBSEARCH - "Fortran syntax" 
+|      |             |GPTSEARCH -  Asked its opinion on my intial approach 
+|      |             |Using module instead of program programName 
+|      |             |subroutines vs. functions
 
 
 
