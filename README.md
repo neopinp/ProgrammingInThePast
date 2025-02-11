@@ -15,8 +15,9 @@ Q: How is each language similar or dissimilar to others?
 |      |             |Shit forward by #, Shift backward by #, solve           |
 |      |             |WEBSEARCH - "Fortran syntax" 
 |      |             |GPTSEARCH -  Asked its opinion on my intial approach 
-|      |             |Using module instead of program programName 
-|      |             |subroutines vs. functions
+|      |             |(T) - Using module instead of program programName 
+|      |             |(T) - subroutines(modules) === functions
+
 
 
 
