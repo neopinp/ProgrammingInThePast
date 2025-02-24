@@ -1,54 +1,67 @@
-No matching declaration found for argument "text"
-No matching declaration found for argument "shift"
-CHARACTER(LEN=100)
+program caesar_cipher
+  implicit none
+  character(len=100) :: input, encrypted, decrypted
+  integer :: shift
 
+  print *, 'Enter text (uppercase, no spaces):'
+  read *, input
+  print *, 'Enter shift amount:'
+  read *, shift
 
-PROGRAM caesarCipher 
-  IMPLICIT NONE
-  CHARACTER(LEN=26) :: alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ! comparison string
-  CHARACTER(LEN=100) :: message, encrypted, decrypted
-  INTEGER :: shift
+  encrypted = encrypt(input, shift)
+  print *, 'Encrypted text:', encrypted
 
-  PRINT *, "Enter message :"
-  READ(*, '(A)') message
-  PRINT *, "Enter shift value:"
-  READ(*,*) shift
-  
-  ! Prompt user for input
-  PRINT *, "Enter message :"
-  READ(*, '(A)') message
-  PRINT *, "Enter shift value:"
-  READ(*,*) shift
+  decrypted = decrypt(encrypted, shift)
+  print *, 'Decrypted text:', decrypted
 
-  ! encrypt the message
-  encrypted =  ENCRYPT(message, shift)
-  PRINT *, "Encrypted message:", TRIM(encrypted)
-  !decrypt the message
-  decrypted = DECRYPT(encrypted, shift)
-  PRINT *, "Decrypted message:", TRIM(decrypted)
-  ! trying all shifts 
-  PRINT *, "Brute force decryption:"
-  CALL SOLVE(encrypted) 
+  call solve(encrypted, 26)
 
+contains
 
+  function encrypt(text, shift) result(out_text)
+    character(len=*), intent(in) :: text
+    integer, intent(in) :: shift
+    character(len=len(text)) :: out_text
+    integer :: i, ascii
 
+    do i = 1, len(text)
+      if (text(i:i) >= 'A' .and. text(i:i) <= 'Z') then
+        ascii = ichar(text(i:i)) + mod(shift, 26)
+        if (ascii > ichar('Z')) ascii = ascii - 26
+        out_text(i:i) = char(ascii)
+      else
+        out_text(i:i) = text(i:i)
+      end if
+    end do
+  end function encrypt
 
-CONTAINS
+  function decrypt(text, shift) result(out_text)
+    character(len=*), intent(in) :: text
+    integer, intent(in) :: shift
+    character(len=len(text)) :: out_text
+    integer :: i, ascii
 
-  ! ENCRYPT FUNCTION - modifies variables passed as args (input text)
-  FUNCTION ENCRYPT(text, shift) RESULT(encrypted)
-    !
-  END FUNCTION ENCRYPT
+    do i = 1, len(text)
+      if (text(i:i) >= 'A' .and. text(i:i) <= 'Z') then
+        ascii = ichar(text(i:i)) - mod(shift, 26)
+        if (ascii < ichar('A')) ascii = ascii + 26
+        out_text(i:i) = char(ascii)
+      else
+        out_text(i:i) = text(i:i)
+      end if
+    end do
+  end function decrypt
 
-  ! DECRYPT FUNCTION
-  FUNCTION DECRYPT()
-    !
-  END FUNCTION DECRYPT
+  subroutine solve(text, maxShift)
+    character(len=*), intent(in) :: text
+    integer, intent(in) :: maxShift
+    integer :: s
+    character(len=len(text)) :: temp
 
+    do s = 0, maxShift
+      temp = decrypt(text, s)
+      print *, 'Caesar ', s, ': ', temp
+    end do
+  end subroutine solve
 
-  ! SOLVE FUNCTION
-  FUNCTION SOLVE()
-    !
-  END FUNCTION SOLVE
-
-END PROGRAM caesarCipher
+end program caesar_cipher
