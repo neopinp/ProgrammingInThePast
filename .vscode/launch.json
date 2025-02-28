@@ -8,10 +8,9 @@
       "program": "${workspaceFolder}/cobol.exe",
       "cwd": "${workspaceFolder}",
       "externalConsole": true,
-      "MIMode": "gdb",
       "setupCommands": [
         {
-          "text": "-file-exec-and-symbols ${workspaceFolder}/cobol.exe",
+          "text": "-file-exec-and-symbols cobol.exe",
           "description": "Load symbols"
         }
       ],

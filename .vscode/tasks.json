@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and Run FreeBASIC",
+            "type": "shell",
+            "command": "C:/FBASIC/FreeBASIC-1.10.1-winlibs-gcc-9.3.0/fbc64.exe",
+            "args": ["${file}"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Compiled Program",
+            "type": "shell",
+            "command": "${fileBasenameNoExtension}.exe",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
+
+
