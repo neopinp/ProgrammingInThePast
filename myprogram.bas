@@ -19,7 +19,6 @@ FUNCTION encrypt (txt AS STRING, shift AS INTEGER) AS STRING
     FOR i = 1 TO LEN(txt)
         charCode = ASC(MID(txt, i, 1))
         
-
         IF charCode >= 65 AND charCode <= 90 THEN
             charCode = ((charCode - 65 + shift) MOD 26) + 65
         END IF
@@ -46,29 +45,12 @@ FUNCTION decrypt (txt AS STRING, shift AS INTEGER) AS STRING
     RETURN decrypted
 END FUNCTION
 
-SUB solve (txt AS STRING)
-    DIM i AS INTEGER, j AS INTEGER, charCode AS INTEGER
-    DIM shiftedText AS STRING
-    DIM letter AS STRING
+SUB solve (txt AS STRING, shiftValue AS INTEGER)
+    DIM i AS INTEGER
+    PRINT "Solving (Showing all shifts from "; shiftValue; " to 0):"
     
-    PRINT "Solving (Showing all shifts from 0 to 25):"
-    
-
-    FOR i = 25 TO 0 STEP -1 
-        shiftedText = "" 
-        
-        FOR j = 1 TO LEN(txt)
-            charCode = ASC(MID(txt, j, 1))
-            
-            IF charCode >= 65 AND charCode <= 90 THEN
-                charCode = ((charCode + 65 + i) MOD 26) + 65 
-            END IF
-            
-            letter = CHR(charCode)
-            shiftedText += letter
-        NEXT j
-        
-        PRINT "Caesar "; i; ": "; shiftedText
+    FOR i = shiftValue TO 0 STEP -1
+        PRINT "Caesar "; i; ": "; decrypt(txt, i)  ' 
     NEXT i
 END SUB
 
@@ -86,12 +68,8 @@ PRINT "Encrypted: "; encryptedText
 decryptedText = decrypt(encryptedText, shift)
 PRINT "Decrypted: "; decryptedText
 
-solve(encryptedText)
+solve(encryptedText, 25)
 
 SLEEP
-
-
-
-
 
 
