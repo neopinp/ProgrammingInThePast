@@ -8,13 +8,13 @@ program caesar_cipher
   print *, 'Enter shift amount:'
   read *, shift_amount
 
-  encrypted = encrypt(trim(adjustl(input)), shift_amount)
+  encrypted = encrypt(trim(input), shift_amount)
   print *, 'Encrypted text:', trim(encrypted)
 
   decrypted = decrypt(encrypted, shift_amount)
   print *, 'Decrypted text:', trim(decrypted)
 
-  call solve(encrypted, 26)
+  call solve(trim(input), 26)  ! Start solving from original input
 
 contains
 
@@ -22,21 +22,19 @@ contains
     character(len=*), intent(in) :: text
     integer, intent(in) :: shift_amount
     character(len=len(text)) :: out_text
-    integer :: i, ascii
+    integer :: i, ascii, new_ascii
 
     out_text = text
     do i = 1, len_trim(text)
-      if (text(i:i) >= 'A' .and. text(i:i) <= 'Z') then
-        ascii = ichar(text(i:i)) + mod(shift_amount, 26)
-        if (ascii > ichar('Z')) ascii = ascii - 26
-        out_text(i:i) = char(ascii)
-      else if (text(i:i) >= 'a' .and. text(i:i) <= 'z') then
-        ascii = ichar(text(i:i)) + mod(shift_amount, 26)
-        if (ascii > ichar('z')) ascii = ascii - 26
-        out_text(i:i) = char(ascii)
+      ascii = ichar(text(i:i))
+      if (ascii >= ichar('A') .and. ascii <= ichar('Z')) then
+        new_ascii = mod(ascii - ichar('A') + shift_amount, 26) + ichar('A')
+      else if (ascii >= ichar('a') .and. ascii <= ichar('z')) then
+        new_ascii = mod(ascii - ichar('a') + shift_amount, 26) + ichar('a')
       else
-        out_text(i:i) = text(i:i)
+        new_ascii = ascii
       end if
+      out_text(i:i) = char(new_ascii)
     end do
   end function encrypt
 
@@ -44,32 +42,36 @@ contains
     character(len=*), intent(in) :: text
     integer, intent(in) :: shift_amount
     character(len=len(text)) :: out_text
-    integer :: i, ascii
+    integer :: i, ascii, new_ascii
 
     out_text = text
     do i = 1, len_trim(text)
-      if (text(i:i) >= 'A' .and. text(i:i) <= 'Z') then
-        ascii = ichar(text(i:i)) - mod(shift_amount, 26)
-        if (ascii < ichar('A')) ascii = ascii + 26
-        out_text(i:i) = char(ascii)
-      else if (text(i:i) >= 'a' .and. text(i:i) <= 'z') then
-        ascii = ichar(text(i:i)) - mod(shift_amount, 26)
-        if (ascii < ichar('a')) ascii = ascii + 26
-        out_text(i:i) = char(ascii)
+      ascii = ichar(text(i:i))
+      if (ascii >= ichar('A') .and. ascii <= ichar('Z')) then
+        new_ascii = mod(ascii - ichar('A') - shift_amount + 26, 26) + ichar('A')
+      else if (ascii >= ichar('a') .and. ascii <= ichar('z')) then
+        new_ascii = mod(ascii - ichar('a') - shift_amount + 26, 26) + ichar('a')
+      else
+        new_ascii = ascii
       end if
+      out_text(i:i) = char(new_ascii)
     end do
   end function decrypt
 
-  subroutine solve(text, maxShift)
-    character(len=*), intent(in) :: text
+  subroutine solve(original_text, maxShift)
+    character(len=*), intent(in) :: original_text
     integer, intent(in) :: maxShift
     integer :: s
-    character(len=len(text)) :: temp
+    character(len=len(original_text)) :: temp
 
-    do s = 0, maxShift
-      temp = decrypt(trim(text), s)
-      print *, 'Caesar ', s, ': ', trim(temp)
+    do s = maxShift, 0, -1  ! Fix: Ensures Caesar 26 is original text
+      temp = encrypt(original_text, s)
+      print '(A, I2, A, A)', 'Caesar ', s, ': ', trim(temp)
     end do
   end subroutine solve
 
 end program caesar_cipher
+
+
+
+
