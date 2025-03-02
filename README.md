@@ -9,3 +9,11 @@ Q: How is each language similar or dissimilar to others?
 ## FORTRAN
 ./caesar_cipher.exe - RUN
 gfortran fortran.f90 -o caesar_cipher.exe - COMPILE 
+
+## COBOL
+./cobol.exe
+## BASIC
+./caesar 
+## PASCAL
+./caesar.pas - run
+## SCALA
