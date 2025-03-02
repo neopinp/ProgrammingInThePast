@@ -14,7 +14,7 @@ program caesar_cipher
   decrypted = decrypt(encrypted, shift_amount)
   print *, 'Decrypted text:', trim(decrypted)
 
-  call solve(trim(input), 26)  ! Start solving from original input
+  call solve(trim(input), 26) 
 
 contains
 
@@ -64,7 +64,7 @@ contains
     integer :: s
     character(len=len(original_text)) :: temp
 
-    do s = maxShift, 0, -1  ! Fix: Ensures Caesar 26 is original text
+    do s = maxShift, 0, -1  
       temp = encrypt(original_text, s)
       print '(A, I2, A, A)', 'Caesar ', s, ': ', trim(temp)
     end do
